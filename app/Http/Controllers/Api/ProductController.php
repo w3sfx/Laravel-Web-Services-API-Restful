@@ -20,9 +20,9 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = $this->product->paginate($this->totalPage);
+        $products = $this->product->getResult($request->all(), $this->totalPage);
 
         return response()->json($products);
     }
@@ -35,7 +35,9 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $product = $this->product->create($request->all());
+
+        return response()->json($product, 201);
     }
 
     /**
@@ -58,7 +60,14 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if (!$product = $this->product->find($id))
+        {
+            return response()->json(['error' => 'Not found'], 404);
+        }
+
+        $product->update($request->all());
+
+        return response()->json($product);
     }
 
     /**
