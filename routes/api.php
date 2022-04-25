@@ -7,6 +7,7 @@
 // $this->put('categories/{id}', 'Api\CategoryController@update');
 
 // $this->delete('categories/{id}', 'Api\CategoryController@delete');
+$this->get('categories/{id}/products', 'Api\CategoryController@products');
 
 $this->apiResource('categories', 'Api\CategoryController');
 
