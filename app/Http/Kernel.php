@@ -40,6 +40,7 @@ class Kernel extends HttpKernel
         'api' => [
             'throttle:60,1', // Limitar requests no API (requests, min de bloqueio)
             'bindings',
+            \Spatie\Cors\Cors::class,
         ],
     ];
 
